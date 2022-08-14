@@ -1,0 +1,24 @@
+Table "deposit" {
+  "id" INT(10) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "user_bankname" VARCHAR(100) [not null]
+  "user_bankaccno" VARCHAR(20) [not null]
+  "user_bankreg" VARCHAR(100) [not null]
+  "ref_number" VARCHAR(50) [default: ""]
+  "nominal" DECIMAL(15,2) [not null]
+  "bank_name" VARCHAR(100) [not null]
+  "bank_acc_no" VARCHAR(20) [not null]
+  "bank_acc_name" VARCHAR(100) [not null]
+  "status" INT(11) [not null, default: "0"]
+  "time" DATETIME [not null]
+  "cashier" INT(11) [default: NULL]
+  "cashier_approval" TINYINT(4) [default: NULL]
+  "cashier_approval_tm" DATETIME [default: NULL]
+  "modify_time" DATETIME [not null]
+  "cashier_note" TEXT [default: NULL]
+
+Indexes {
+  user_id [name: "user_id"]
+  status [name: "status"]
+}
+}

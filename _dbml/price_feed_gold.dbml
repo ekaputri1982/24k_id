@@ -1,0 +1,14 @@
+Table "price_feed_gold" {
+  "id" INT(11) [pk, not null, increment]
+  "price_time" DATETIME [not null]
+  "beli" DOUBLE [not null, default: "0"]
+  "jual" DOUBLE [not null, default: "0"]
+  "user_id" INT(11) [not null, default: "0"]
+  "update_time" DATETIME [not null]
+
+Indexes {
+  price_time [unique, name: "price_time"]
+  update_time [name: "update_time"]
+  user_id [name: "user_id"]
+}
+}

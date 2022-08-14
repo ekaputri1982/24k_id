@@ -1,0 +1,19 @@
+Table "logs" {
+  "id" INT(10) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "act" VARCHAR(100) [not null]
+  "ip" VARCHAR(15) [not null]
+  "browser" VARCHAR(200) [not null]
+  "waktu" DATETIME [not null]
+  "notes" TEXT [default: NULL]
+  "target" INT(11) [not null, default: "0"]
+
+Indexes {
+  user_id [name: "user_id"]
+  act [name: "act"]
+  ip [name: "ip"]
+  browser [name: "browser"]
+  waktu [name: "waktu"]
+  target [name: "target"]
+}
+}

@@ -1,0 +1,35 @@
+CREATE TABLE `com_transaction_history` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`commodity` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`created_at` DATETIME NULL DEFAULT NULL,
+	`user_id` INT(11) NOT NULL DEFAULT '0',
+	`cmd` TINYINT(4) NOT NULL DEFAULT '0',
+	`sell_price` DOUBLE NOT NULL DEFAULT '0',
+	`buy_price` DOUBLE NOT NULL DEFAULT '0',
+	`volume` DOUBLE NOT NULL DEFAULT '0',
+	`prev_volume` DOUBLE NOT NULL DEFAULT '0',
+	`now_volume` DOUBLE NOT NULL DEFAULT '0',
+	`jumlah` DOUBLE NOT NULL DEFAULT '0',
+	`prev_wallet` DOUBLE NOT NULL DEFAULT '0',
+	`now_wallet` DOUBLE NOT NULL DEFAULT '0',
+	`confirm_at` DATETIME NOT NULL,
+	`admin_id` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `cmd` (`cmd`) USING BTREE,
+	INDEX `confirm_at` (`confirm_at`) USING BTREE,
+	INDEX `created_at` (`created_at`) USING BTREE,
+	INDEX `user_id` (`user_id`) USING BTREE,
+	INDEX `jumlah` (`jumlah`) USING BTREE,
+	INDEX `sell_price` (`sell_price`) USING BTREE,
+	INDEX `buy_price` (`buy_price`) USING BTREE,
+	INDEX `admin_id` (`admin_id`) USING BTREE,
+	INDEX `volume` (`volume`) USING BTREE,
+	INDEX `prev_wallet` (`prev_wallet`) USING BTREE,
+	INDEX `commodity` (`commodity`) USING BTREE,
+	INDEX `now_wallet` (`now_wallet`) USING BTREE,
+	INDEX `prev_volume` (`prev_volume`) USING BTREE,
+	INDEX `now_volume` (`now_volume`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;

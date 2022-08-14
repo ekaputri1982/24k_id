@@ -1,0 +1,40 @@
+Enum "users_profile_jenis_kelamin_enum" {
+  "0"
+  "1"
+}
+
+Enum "users_profile_agama_enum" {
+  "0"
+  "1"
+  "2"
+  "3"
+  "4"
+}
+
+Enum "users_profile_status_pernikahan_enum" {
+  "0"
+  "1"
+}
+
+Enum "users_profile_penghasilan_enum" {
+  "0"
+  "1"
+  "2"
+  "3"
+}
+
+Table "users_profile" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "jenis_kelamin" users_profile_jenis_kelamin_enum [not null, note: '0 : Laki Laki , 1 : Perempuan']
+  "agama" users_profile_agama_enum [not null, note: '0 : Islam , 1 : Protestan, 2 : Katolik, 3 : Hindu, 4 : Buddha, 5 : Khonghucu']
+  "status_pernikahan" users_profile_status_pernikahan_enum [not null, note: '0 : Belum menikah , 1 : Menikah']
+  "pekerjaan" VARCHAR(50) [not null]
+  "pendidikan" VARCHAR(50) [not null]
+  "penghasilan" users_profile_penghasilan_enum [not null, note: '0 : Dibawah 30jt, 1 : 30-50jt , 2 : 100-500jt, 3 : Diatas 500jt']
+  "sumber_pendapatan" VARCHAR(50) [not null]
+  "tujuan_investasi" VARCHAR(50) [not null]
+  "tanda_tangan" VARCHAR(255) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : Waiting, 1 : Verified, 2 : Refused']
+  "reason" VARCHAR(255) [default: NULL]
+}

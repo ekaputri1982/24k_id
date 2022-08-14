@@ -1,0 +1,13 @@
+Table "posts" {
+  "id" INT(11) [pk, not null, increment]
+  "type" TINYINT(4) [not null, note: '1. news, 2. promo, 3. tutorial']
+  "slug" VARCHAR(255) [not null]
+  "title" VARCHAR(100) [not null]
+  "subtitle" VARCHAR(255) [not null]
+  "image" TEXT [default: NULL]
+  "content" TEXT [default: NULL]
+  "active" TINYINT(4) [default: NULL]
+  "author_id" INT(11) [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "updated_at" DATETIME [default: NULL]
+}

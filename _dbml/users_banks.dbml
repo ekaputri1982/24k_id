@@ -1,0 +1,11 @@
+Table "users_banks" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "bank_name" VARCHAR(100) [not null]
+  "bank_acc_no" VARCHAR(20) [not null]
+  "bank_acc_name" VARCHAR(100) [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "acc_status" TINYINT(1) [default: "0", note: '0:PENDING , 1 : VERIFIED, 2: DECLINED']
+  "approval_date" DATETIME [default: NULL]
+  "reason" VARCHAR(255) [default: NULL]
+}

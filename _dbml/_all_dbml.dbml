@@ -1,0 +1,552 @@
+Table "bank" {
+  "id" INT(11) [pk, not null, increment]
+  "code" VARCHAR(50) [not null]
+  "name" VARCHAR(100) [not null]
+  "image_url" TEXT [default: NULL]
+  "active" TINYINT(4) [default: "1"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "updated_at" DATETIME [default: NULL]
+
+Indexes {
+  (code, name) [unique, name: "code"]
+}
+}
+
+Table "com_transaction_history" {
+  "id" INT(11) [pk, not null, increment]
+  "commodity" VARCHAR(50) [not null]
+  "created_at" DATETIME [default: NULL]
+  "user_id" INT(11) [not null, default: "0"]
+  "cmd" TINYINT(4) [not null, default: "0"]
+  "sell_price" DOUBLE [not null, default: "0"]
+  "buy_price" DOUBLE [not null, default: "0"]
+  "volume" DOUBLE [not null, default: "0"]
+  "prev_volume" DOUBLE [not null, default: "0"]
+  "now_volume" DOUBLE [not null, default: "0"]
+  "jumlah" DOUBLE [not null, default: "0"]
+  "prev_wallet" DOUBLE [not null, default: "0"]
+  "now_wallet" DOUBLE [not null, default: "0"]
+  "confirm_at" DATETIME [not null]
+  "admin_id" INT(11) [default: NULL]
+
+Indexes {
+  cmd [name: "cmd"]
+  confirm_at [name: "confirm_at"]
+  created_at [name: "created_at"]
+  user_id [name: "user_id"]
+  jumlah [name: "jumlah"]
+  sell_price [name: "sell_price"]
+  buy_price [name: "buy_price"]
+  admin_id [name: "admin_id"]
+  volume [name: "volume"]
+  prev_wallet [name: "prev_wallet"]
+  commodity [name: "commodity"]
+  now_wallet [name: "now_wallet"]
+  prev_volume [name: "prev_volume"]
+  now_volume [name: "now_volume"]
+}
+}
+
+Table "com_transaction" {
+  "id" INT(11) [pk, not null, increment]
+  "commodity" VARCHAR(50) [not null]
+  "created_at" DATETIME [default: NULL]
+  "user_id" INT(11) [not null, default: "0"]
+  "cmd" TINYINT(4) [not null, default: "0"]
+  "sell_price" DOUBLE [not null, default: "0"]
+  "buy_price" DOUBLE [not null, default: "0"]
+  "volume" DOUBLE [not null, default: "0"]
+  "prev_volume" DOUBLE [not null, default: "0"]
+  "now_volume" DOUBLE [not null, default: "0"]
+  "jumlah" DOUBLE [not null, default: "0"]
+  "prev_wallet" DOUBLE [not null, default: "0"]
+  "now_wallet" DOUBLE [not null, default: "0"]
+  "confirm_at" DATETIME [not null]
+  "admin_id" INT(11) [default: NULL]
+
+Indexes {
+  cmd [name: "cmd"]
+  confirm_at [name: "confirm_at"]
+  created_at [name: "created_at"]
+  user_id [name: "user_id"]
+  jumlah [name: "jumlah"]
+  sell_price [name: "sell_price"]
+  buy_price [name: "buy_price"]
+  admin_id [name: "admin_id"]
+  volume [name: "volume"]
+  prev_wallet [name: "prev_wallet"]
+  commodity [name: "commodity"]
+  now_wallet [name: "now_wallet"]
+  prev_volume [name: "prev_volume"]
+  now_volume [name: "now_volume"]
+}
+}
+
+Table "companybank" {
+  "bank_id" INT(5) [pk, not null, increment]
+  "curr_id" INT(5) [not null]
+  "bank_name" VARCHAR(100) [not null]
+  "bank_acc_no" VARCHAR(20) [not null]
+  "bank_acc_name" VARCHAR(100) [not null]
+  "active" TINYINT(5) [not null, default: "0"]
+}
+
+Table "configs" {
+  "cfg" VARCHAR(64) [pk, not null]
+  "value" VARCHAR(255) [not null]
+}
+
+Table "courier" {
+  "id" INT(11) [pk, not null, increment]
+  "code" VARCHAR(10) [not null]
+  "courier_name" VARCHAR(50) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : tidak aktif, 1 : aktif']
+}
+
+Enum "data_wilayah_LEVEL_enum" {
+  "1"
+  "2"
+  "3"
+  "4"
+}
+
+Table "data_wilayah" {
+  "KODE_WILAYAH" VARCHAR(8) [pk, not null]
+  "MST_KODE_WILAYAH" VARCHAR(8) [not null]
+  "NAMA" VARCHAR(255) [not null]
+  "LEVEL" data_wilayah_LEVEL_enum [not null]
+
+Indexes {
+  (MST_KODE_WILAYAH, KODE_WILAYAH) [unique, name: "UNIQUE"]
+}
+}
+
+Table "delivery" {
+  "id" INT(5) [pk, not null, increment]
+  "name" VARCHAR(100) [not null]
+  "type" VARCHAR(100) [not null]
+  "fare" DOUBLE [not null]
+  "estimates_days" VARCHAR(200) [not null]
+  "active" TINYINT(5) [not null, default: "0"]
+}
+
+Table "deposit" {
+  "id" INT(10) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "user_bankname" VARCHAR(100) [not null]
+  "user_bankaccno" VARCHAR(20) [not null]
+  "user_bankreg" VARCHAR(100) [not null]
+  "ref_number" VARCHAR(50) [default: ""]
+  "nominal" DECIMAL(15,2) [not null]
+  "bank_name" VARCHAR(100) [not null]
+  "bank_acc_no" VARCHAR(20) [not null]
+  "bank_acc_name" VARCHAR(100) [not null]
+  "status" INT(11) [not null, default: "0"]
+  "time" DATETIME [not null]
+  "cashier" INT(11) [default: NULL]
+  "cashier_approval" TINYINT(4) [default: NULL]
+  "cashier_approval_tm" DATETIME [default: NULL]
+  "modify_time" DATETIME [not null]
+  "cashier_note" TEXT [default: NULL]
+
+Indexes {
+  user_id [name: "user_id"]
+  status [name: "status"]
+}
+}
+
+Table "email_events" {
+  "id" INT(11) [pk, not null, increment]
+  "name" VARCHAR(50) [not null]
+  "notes" TEXT [not null]
+  "tags" TEXT [default: NULL]
+
+Indexes {
+  name [unique, name: "name"]
+}
+}
+
+Table "emails" {
+  "id" INT(11) [pk, not null, increment]
+  "title" TEXT [not null]
+  "subject" TEXT [not null]
+  "from_name" VARCHAR(50) [not null]
+  "from_mail" VARCHAR(50) [not null]
+  "to_name" VARCHAR(50) [not null]
+  "to_mail" VARCHAR(50) [not null]
+  "bcc_name" VARCHAR(50) [default: NULL]
+  "bcc_mail" VARCHAR(50) [default: NULL]
+  "replyto_name" VARCHAR(50) [not null]
+  "replyto_mail" VARCHAR(50) [not null]
+  "content" TEXT [not null]
+  "event_id" INT(11) [default: NULL]
+}
+
+Table "emas_journal" {
+  "id" INT(11) [pk, not null, increment]
+  "trans_id" INT(11) [not null]
+  "user_id" INT(11) [not null]
+  "volume" DOUBLE [not null]
+  "created_at" DATETIME [not null]
+  "prev_balance" DOUBLE [not null, default: "0"]
+  "balance" DOUBLE [not null]
+
+Indexes {
+  trans_id [name: "trans_id"]
+  user_id [name: "user_id"]
+}
+}
+
+Table "emas_transaction" {
+  "id" INT(11) [pk, not null, increment]
+  "seller_id" INT(11) [not null]
+  "buyer_id" INT(11) [not null]
+  "harga_beli" DOUBLE [not null, default: "0"]
+  "harga_jual" DOUBLE [not null, default: "0"]
+  "volume" DOUBLE [not null]
+  "created_at" DATETIME [not null]
+
+Indexes {
+  seller_id [name: "seller_id"]
+  buyer_id [name: "buyer_id"]
+}
+}
+
+Table "fee_wd_gold" {
+  "id" INT(11) [pk, not null, increment]
+  "name" VARCHAR(100) [not null, default: ""]
+  "fee" DOUBLE [not null, default: "0"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "active" TINYINT(1) [not null, default: "1"]
+  "unit" DOUBLE [not null]
+}
+
+Table "logs" {
+  "id" INT(10) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "act" VARCHAR(100) [not null]
+  "ip" VARCHAR(15) [not null]
+  "browser" VARCHAR(200) [not null]
+  "waktu" DATETIME [not null]
+  "notes" TEXT [default: NULL]
+  "target" INT(11) [not null, default: "0"]
+
+Indexes {
+  user_id [name: "user_id"]
+  act [name: "act"]
+  ip [name: "ip"]
+  browser [name: "browser"]
+  waktu [name: "waktu"]
+  target [name: "target"]
+}
+}
+
+Table "migrations" {
+  "id" INT(11) [pk, not null, increment]
+  "timestamp" BIGINT(20) [not null]
+  "name" VARCHAR(255) [not null]
+}
+
+Table "posts" {
+  "id" INT(11) [pk, not null, increment]
+  "type" TINYINT(4) [not null, note: '1. news, 2. promo, 3. tutorial']
+  "slug" VARCHAR(255) [not null]
+  "title" VARCHAR(100) [not null]
+  "subtitle" VARCHAR(255) [not null]
+  "image" TEXT [default: NULL]
+  "content" TEXT [default: NULL]
+  "active" TINYINT(4) [default: NULL]
+  "author_id" INT(11) [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "updated_at" DATETIME [default: NULL]
+}
+
+Table "price_feed_gold" {
+  "id" INT(11) [pk, not null, increment]
+  "price_time" DATETIME [not null]
+  "beli" DOUBLE [not null, default: "0"]
+  "jual" DOUBLE [not null, default: "0"]
+  "user_id" INT(11) [not null, default: "0"]
+  "update_time" DATETIME [not null]
+
+Indexes {
+  price_time [unique, name: "price_time"]
+  update_time [name: "update_time"]
+  user_id [name: "user_id"]
+}
+}
+
+Table "users_banks" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "bank_name" VARCHAR(100) [not null]
+  "bank_acc_no" VARCHAR(20) [not null]
+  "bank_acc_name" VARCHAR(100) [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "acc_status" TINYINT(1) [default: "0", note: '0:PENDING , 1 : VERIFIED, 2: DECLINED']
+  "approval_date" DATETIME [default: NULL]
+  "reason" VARCHAR(255) [default: NULL]
+}
+
+Table "users_groups_rules" {
+  "groupid" INT(11) [not null]
+  "ruleid" INT(11) [not null]
+
+Indexes {
+  groupid [name: "groupid"]
+  (groupid, ruleid) [pk]
+}
+}
+
+Table "users_groups" {
+  "id" INT(11) [pk, not null]
+  "path" VARCHAR(1024) [default: NULL]
+  "name" VARCHAR(50) [default: NULL]
+
+Indexes {
+  name [unique, name: "name"]
+  path [unique, name: "path"]
+}
+}
+
+Table "users_identity" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "fullname" VARCHAR(50) [not null]
+  "identity_no" VARCHAR(50) [not null]
+  "identity" VARCHAR(128) [not null]
+  "identity_self" VARCHAR(128) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : Waiting, 1 : Verified, 2 : Refused']
+  "reason" VARCHAR(255) [default: NULL]
+  "identity_type" TINYINT(1) [not null, note: '0 : KTP, 1 : SIM, 2 : PASSPORT, 3 : KITAS, 4 : KITAP']
+
+Indexes {
+  user_id [name: "user_id"]
+}
+}
+
+Enum "users_profile_jenis_kelamin_enum" {
+  "0"
+  "1"
+}
+
+Enum "users_profile_agama_enum" {
+  "0"
+  "1"
+  "2"
+  "3"
+  "4"
+}
+
+Enum "users_profile_status_pernikahan_enum" {
+  "0"
+  "1"
+}
+
+Enum "users_profile_penghasilan_enum" {
+  "0"
+  "1"
+  "2"
+  "3"
+}
+
+Table "users_profile" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "jenis_kelamin" users_profile_jenis_kelamin_enum [not null, note: '0 : Laki Laki , 1 : Perempuan']
+  "agama" users_profile_agama_enum [not null, note: '0 : Islam , 1 : Protestan, 2 : Katolik, 3 : Hindu, 4 : Buddha, 5 : Khonghucu']
+  "status_pernikahan" users_profile_status_pernikahan_enum [not null, note: '0 : Belum menikah , 1 : Menikah']
+  "pekerjaan" VARCHAR(50) [not null]
+  "pendidikan" VARCHAR(50) [not null]
+  "penghasilan" users_profile_penghasilan_enum [not null, note: '0 : Dibawah 30jt, 1 : 30-50jt , 2 : 100-500jt, 3 : Diatas 500jt']
+  "sumber_pendapatan" VARCHAR(50) [not null]
+  "tujuan_investasi" VARCHAR(50) [not null]
+  "tanda_tangan" VARCHAR(255) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : Waiting, 1 : Verified, 2 : Refused']
+  "reason" VARCHAR(255) [default: NULL]
+}
+
+Table "users_query_share" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "query_id" INT(11) [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+
+Indexes {
+  user_id [name: "user_id"]
+  query_id [name: "query_id"]
+  created_at [name: "created_at"]
+}
+}
+
+Table "users_query" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "widget_id" VARCHAR(50) [not null]
+  "title" VARCHAR(255) [not null]
+  "query_text" TEXT [not null]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+
+Indexes {
+  user_id [name: "user_id"]
+  widget_id [name: "widget_id"]
+  title [name: "title"]
+  created_at [name: "created_at"]
+}
+}
+
+Table "users_rules" {
+  "id" INT(11) [pk, not null]
+  "rules" VARCHAR(128) [not null]
+  "state" TINYINT(4) [not null, default: "0"]
+
+Indexes {
+  rules [unique, name: "rules"]
+  state [name: "state"]
+}
+}
+
+Table "users_spesific_rules" {
+  "userid" INT(11) [not null]
+  "ruleid" INT(11) [not null]
+
+Indexes {
+  userid [name: "userid"]
+  (userid, ruleid) [pk]
+}
+}
+
+Table "users_usergroups" {
+  "userid" INT(11) [not null, default: "0"]
+  "groupid" INT(11) [not null, default: "0"]
+
+Indexes {
+  (userid, groupid) [pk]
+}
+}
+
+Table "users" {
+  "id" INT(11) [pk, not null, increment]
+  "username" VARCHAR(50) [default: NULL]
+  "name" VARCHAR(50) [not null]
+  "email" VARCHAR(50) [not null]
+  "password" VARCHAR(75) [not null]
+  "pin" VARCHAR(75) [default: NULL]
+  "last_activity" DATETIME [default: NULL]
+  "phone" VARCHAR(75) [default: NULL]
+  "district" VARCHAR(75) [default: NULL]
+  "alamat" VARCHAR(250) [default: NULL]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "verify_token" VARCHAR(255) [default: NULL]
+  "verify_expiry" DATETIME [default: NULL]
+  "pin_token" VARCHAR(255) [default: NULL]
+  "pin_expiry" DATETIME [default: NULL]
+  "pass_token" VARCHAR(255) [default: NULL]
+  "pass_expiry" DATETIME [default: NULL]
+  "verified" TINYINT(4) [not null, default: "0"]
+  "wallet" DOUBLE [not null, default: "0"]
+  "emas" DOUBLE [not null, default: "0"]
+  "avg_harga_beli" INT(11) [default: "0"]
+
+Indexes {
+  email [unique, name: "email"]
+  username [unique, name: "username"]
+  name [name: "name"]
+  created_at [name: "created_at"]
+  verified [name: "verified"]
+  password [name: "password"]
+  verify_token [name: "verify_token"]
+  verify_expiry [name: "verify_expiry"]
+  district [name: "district"]
+  alamat [name: "alamat"]
+  phone [name: "phone"]
+  wallet [name: "wallet"]
+  emas [name: "emas"]
+}
+}
+
+Table "wallet_history" {
+  "id" INT(11) [pk, not null, increment]
+  "trans_id" INT(11) [default: NULL]
+  "user_id" INT(11) [not null]
+  "title" VARCHAR(50) [not null]
+  "nominal" DECIMAL(15,2) [not null]
+  "type" TINYINT(1) [not null, note: '0 : minus , 1 : plus']
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "source" TINYINT(1) [not null, note: '0 : withdrawal , 1 : top up , 2 : buy gold , 3 : sell gold']
+
+Indexes {
+  trans_id [name: "trans_id"]
+}
+}
+
+Table "wd_gold_history" {
+  "id" INT(5) [pk, not null, increment]
+  "wd_gold_id" INT(11) [not null]
+  "name" VARCHAR(200) [not null, default: ""]
+  "quantity" INT(11) [not null, default: "0"]
+  "fee" DOUBLE [not null, default: "0"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+
+Indexes {
+  wd_gold_id [name: "wd_gold_id"]
+}
+}
+
+Table "withdrawal_gold" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "province_id" INT(11) [not null]
+  "city_id" INT(11) [not null]
+  "district_id" INT(11) [not null]
+  "post_code" VARCHAR(50) [not null]
+  "address" TEXT [not null]
+  "status" INT(1) [not null, default: "0", note: '0=pending,1=verified,2=declined, 3=onprocess, 4=ondeliver, 5=done']
+  "time" DATETIME [not null]
+  "emas" DOUBLE [not null]
+  "fee" DOUBLE [not null, default: "0"]
+  "insurance" DOUBLE [not null, default: "0"]
+  "delivery_name" VARCHAR(20) [not null]
+  "delivery_type" VARCHAR(20) [not null]
+  "delivery_fare" DOUBLE [not null]
+  "delivery_estimates_days" VARCHAR(20) [not null]
+  "delivery_desc" VARCHAR(75) [not null, default: ""]
+  "delivery_no" VARCHAR(75) [default: NULL]
+  "document" VARCHAR(255) [default: NULL]
+  "cashier" INT(11) [default: NULL]
+  "cashier_approval" TINYINT(4) [default: NULL]
+  "cashier_approval_tm" DATETIME [default: NULL]
+  "MODIFY_TIME" DATETIME [not null]
+  "cashier_note" TEXT [default: NULL]
+  "verify_token" VARCHAR(255) [default: NULL]
+  "verify_expiry" DATETIME [default: NULL]
+  "verified" TINYINT(4) [not null, default: "0"]
+
+Indexes {
+  user_id [name: "user_id"]
+  verify_token [name: "verify_token"]
+  verify_expiry [name: "verify_expiry"]
+  verified [name: "verified"]
+}
+}
+
+Table "withdrawal" {
+  "id" INT(5) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "user_bankname" VARCHAR(20) [not null]
+  "user_bankaccno" VARCHAR(20) [not null]
+  "user_bankreg" VARCHAR(100) [not null]
+  "ref_number" VARCHAR(50) [default: ""]
+  "nominal" DECIMAL(15,2) [not null]
+  "time" DATETIME [not null]
+  "status" INT(1) [not null, default: "0", note: '0=pending,1=verified,2=declined']
+  "fee" FLOAT [default: NULL]
+  "cashier" INT(11) [default: NULL]
+  "cashier_complete_tm" DATETIME [default: NULL]
+  "cashier_note" TEXT [default: NULL]
+  "modify_time" DATETIME [not null]
+
+Indexes {
+  user_id [name: "user_id"]
+}
+}

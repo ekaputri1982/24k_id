@@ -1,0 +1,20 @@
+Table "withdrawal" {
+  "id" INT(5) [pk, not null, increment]
+  "user_id" INT(5) [not null]
+  "user_bankname" VARCHAR(20) [not null]
+  "user_bankaccno" VARCHAR(20) [not null]
+  "user_bankreg" VARCHAR(100) [not null]
+  "ref_number" VARCHAR(50) [default: ""]
+  "nominal" DECIMAL(15,2) [not null]
+  "time" DATETIME [not null]
+  "status" INT(1) [not null, default: "0", note: '0=pending,1=verified,2=declined']
+  "fee" FLOAT [default: NULL]
+  "cashier" INT(11) [default: NULL]
+  "cashier_complete_tm" DATETIME [default: NULL]
+  "cashier_note" TEXT [default: NULL]
+  "modify_time" DATETIME [not null]
+
+Indexes {
+  user_id [name: "user_id"]
+}
+}

@@ -1,0 +1,15 @@
+Table "users_identity" {
+  "id" INT(11) [pk, not null, increment]
+  "user_id" INT(11) [not null]
+  "fullname" VARCHAR(50) [not null]
+  "identity_no" VARCHAR(50) [not null]
+  "identity" VARCHAR(128) [not null]
+  "identity_self" VARCHAR(128) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : Waiting, 1 : Verified, 2 : Refused']
+  "reason" VARCHAR(255) [default: NULL]
+  "identity_type" TINYINT(1) [not null, note: '0 : KTP, 1 : SIM, 2 : PASSPORT, 3 : KITAS, 4 : KITAP']
+
+Indexes {
+  user_id [name: "user_id"]
+}
+}

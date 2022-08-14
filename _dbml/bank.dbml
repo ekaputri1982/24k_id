@@ -1,0 +1,13 @@
+Table "bank" {
+  "id" INT(11) [pk, not null, increment]
+  "code" VARCHAR(50) [not null]
+  "name" VARCHAR(100) [not null]
+  "image_url" TEXT [default: NULL]
+  "active" TINYINT(4) [default: "1"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "updated_at" DATETIME [default: NULL]
+
+Indexes {
+  (code, name) [unique, name: "code"]
+}
+}

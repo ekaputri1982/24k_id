@@ -1,0 +1,6 @@
+Table "courier" {
+  "id" INT(11) [pk, not null, increment]
+  "code" VARCHAR(10) [not null]
+  "courier_name" VARCHAR(50) [not null]
+  "status" TINYINT(1) [not null, default: "0", note: '0 : tidak aktif, 1 : aktif']
+}

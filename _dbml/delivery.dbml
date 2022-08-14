@@ -1,0 +1,8 @@
+Table "delivery" {
+  "id" INT(5) [pk, not null, increment]
+  "name" VARCHAR(100) [not null]
+  "type" VARCHAR(100) [not null]
+  "fare" DOUBLE [not null]
+  "estimates_days" VARCHAR(200) [not null]
+  "active" TINYINT(5) [not null, default: "0"]
+}

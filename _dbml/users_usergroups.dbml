@@ -1,0 +1,8 @@
+Table "users_usergroups" {
+  "userid" INT(11) [not null, default: "0"]
+  "groupid" INT(11) [not null, default: "0"]
+
+Indexes {
+  (userid, groupid) [pk]
+}
+}

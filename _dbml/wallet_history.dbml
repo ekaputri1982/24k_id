@@ -1,0 +1,14 @@
+Table "wallet_history" {
+  "id" INT(11) [pk, not null, increment]
+  "trans_id" INT(11) [default: NULL]
+  "user_id" INT(11) [not null]
+  "title" VARCHAR(50) [not null]
+  "nominal" DECIMAL(15,2) [not null]
+  "type" TINYINT(1) [not null, note: '0 : minus , 1 : plus']
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "source" TINYINT(1) [not null, note: '0 : withdrawal , 1 : top up , 2 : buy gold , 3 : sell gold']
+
+Indexes {
+  trans_id [name: "trans_id"]
+}
+}

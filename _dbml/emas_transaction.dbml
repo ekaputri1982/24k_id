@@ -1,0 +1,14 @@
+Table "emas_transaction" {
+  "id" INT(11) [pk, not null, increment]
+  "seller_id" INT(11) [not null]
+  "buyer_id" INT(11) [not null]
+  "harga_beli" DOUBLE [not null, default: "0"]
+  "harga_jual" DOUBLE [not null, default: "0"]
+  "volume" DOUBLE [not null]
+  "created_at" DATETIME [not null]
+
+Indexes {
+  seller_id [name: "seller_id"]
+  buyer_id [name: "buyer_id"]
+}
+}

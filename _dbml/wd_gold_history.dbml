@@ -1,0 +1,12 @@
+Table "wd_gold_history" {
+  "id" INT(5) [pk, not null, increment]
+  "wd_gold_id" INT(11) [not null]
+  "name" VARCHAR(200) [not null, default: ""]
+  "quantity" INT(11) [not null, default: "0"]
+  "fee" DOUBLE [not null, default: "0"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+
+Indexes {
+  wd_gold_id [name: "wd_gold_id"]
+}
+}

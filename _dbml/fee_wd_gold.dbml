@@ -1,0 +1,8 @@
+Table "fee_wd_gold" {
+  "id" INT(11) [pk, not null, increment]
+  "name" VARCHAR(100) [not null, default: ""]
+  "fee" DOUBLE [not null, default: "0"]
+  "created_at" DATETIME [default: `utc_timestamp()`]
+  "active" TINYINT(1) [not null, default: "1"]
+  "unit" DOUBLE [not null]
+}

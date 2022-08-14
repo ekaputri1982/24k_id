@@ -1,0 +1,14 @@
+Table "emas_journal" {
+  "id" INT(11) [pk, not null, increment]
+  "trans_id" INT(11) [not null]
+  "user_id" INT(11) [not null]
+  "volume" DOUBLE [not null]
+  "created_at" DATETIME [not null]
+  "prev_balance" DOUBLE [not null, default: "0"]
+  "balance" DOUBLE [not null]
+
+Indexes {
+  trans_id [name: "trans_id"]
+  user_id [name: "user_id"]
+}
+}
